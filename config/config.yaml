@@ -1,0 +1,13 @@
+# config/config.yaml
+
+test:
+  base_url: "https://dummyjson.com"
+  timeout: 10
+  headers:
+    Content-Type: "application/json"
+
+prod:
+  base_url: "https://dummyjson.com"
+  timeout: 15
+  headers:
+    Content-Type: "application/json"
