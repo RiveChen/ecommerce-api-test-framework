@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [main]
 
+permissions:
+  contents: write   # gh-pages 推送需要写权限
+
 jobs:
   test:
     runs-on: ubuntu-latest
