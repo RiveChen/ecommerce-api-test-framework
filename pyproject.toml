@@ -1,6 +1,6 @@
 [project]
-name = "pytest-api-automator"
-version = "0.0.1"
+name = "ecommerce-api-test-framework"
+version = "0.1.0"
 description = "A simple pytest api automator"
 readme = "README.md"
 requires-python = ">=3.11"

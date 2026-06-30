@@ -1,8 +1,8 @@
-# qa-dummyjson-framework
+# ecommerce-api-test-framework
 
 基于 **pytest + requests + Allure** 搭建的接口自动化测试框架，覆盖 DummyJSON 电商 API 的 Auth / Products / Users 三个模块，支持 YAML 数据驱动，接入 GitHub Actions CI，测试报告自动发布至 GitHub Pages。
 
--> **[在线 Allure 报告](https://RiveChen.github.io/qa-dummyjson-framework)** <-
+-> **[在线 Allure 报告](https://RiveChen.github.io/ecommerce-api-test-framework)** <-
 
 ---
 
@@ -24,8 +24,8 @@
 ## 快速开始
 
 ```bash
-git clone https://github.com/RiveChen/qa-dummyjson-framework.git
-cd qa-dummyjson-framework
+git clone https://github.com/RiveChen/ecommerce-api-test-framework.git
+cd ecommerce-api-test-framework
 uv sync
 ```
 
@@ -100,7 +100,7 @@ Epic:    DummyJSON API
 3. 运行 `uv run pytest --alluredir=allure-results`
 4. 生成 Allure HTML 报告并部署至 GitHub Pages
 
-在线报告地址：`https://RiveChen.github.io/qa-dummyjson-framework`
+在线报告地址：`https://RiveChen.github.io/ecommerce-api-test-framework`
 
 ---
 
