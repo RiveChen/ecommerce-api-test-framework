@@ -1,0 +1,16 @@
+invalid_login:
+- id: "AUTH-001"
+  description: "密码错误"
+  input:
+    username: "emilys"
+    password: "wrongpassword"
+  expected:
+    status_code_not: 200
+
+- id: "AUTH-002"
+  description: "用户不存在"
+  input:
+    username: "no_such_user_xyz"
+    password: "anypassword"
+  expected:
+    status_code_not: 200

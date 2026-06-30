@@ -1,8 +1,12 @@
 import pytest
 import allure
 from utils import assertion
+from utils.data_loader import load_cases
 
 pytestmark = allure.feature("Products 模块")
+
+_get_by_id_cases = load_cases("product_cases.yaml", "get_by_id")
+_limit_cases = load_cases("product_cases.yaml", "list_with_limit")
 
 
 @allure.story("商品列表")
@@ -21,28 +25,25 @@ def test_list_products_default(product_api):
 
 @allure.story("商品列表 — 分页参数")
 @pytest.mark.products
-@pytest.mark.parametrize("limit", [5, 10, 20])
-def test_list_products_with_limit(product_api, limit):
-    resp = product_api.list(limit=limit)
+@pytest.mark.parametrize("case", _limit_cases, ids=[c["id"] for c in _limit_cases])
+def test_list_products_with_limit(product_api, case):
+    with allure.step(f"{case['id']}: {case['description']}"):
+        resp = product_api.list(limit=case["input"]["limit"])
     assertion.assert_status_code(resp, 200)
-    assert len(resp.json()["products"]) == limit
+    assert len(resp.json()["products"]) == case["expected"]["count"]
 
 
 @allure.story("查询单个商品")
 @pytest.mark.products
 @pytest.mark.parametrize(
-    "product_id,expected_status",
-    [
-        (1, 200),
-        (2, 200),
-        (99999, 404),
-    ],
+    "case", _get_by_id_cases, ids=[c["id"] for c in _get_by_id_cases]
 )
-def test_get_product_by_id(product_api, product_id, expected_status):
-    resp = product_api.get(product_id)
-    assertion.assert_status_code(resp, expected_status)
-    if expected_status == 200:
-        assertion.assert_field_equals(resp, "id", product_id)
+def test_get_product_by_id(product_api, case):
+    with allure.step(f"{case['id']}: {case['description']}"):
+        resp = product_api.get(case["input"]["product_id"])
+    assertion.assert_status_code(resp, case["expected"]["status_code"])
+    if case["expected"]["status_code"] == 200:
+        assertion.assert_field_equals(resp, "id", case["input"]["product_id"])
 
 
 @allure.story("商品搜索 — 有结果")

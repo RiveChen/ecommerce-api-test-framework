@@ -1,8 +1,11 @@
 import pytest
 import allure
 from utils import assertion
+from utils.data_loader import load_cases
 
 pytestmark = allure.feature("Auth 模块")
+
+_invalid_login_cases = load_cases("auth_cases.yaml", "invalid_login")
 
 
 @allure.story("登录成功")
@@ -21,15 +24,15 @@ def test_login_success(auth_api):
 @allure.story("登录失败 — 凭证错误")
 @pytest.mark.auth
 @pytest.mark.parametrize(
-    "username,password,desc",
-    [
-        ("emilys", "wrongpassword", "密码错误"),
-        ("no_such_user_xyz", "anypassword", "用户不存在"),
-    ],
+    "case", _invalid_login_cases, ids=[c["id"] for c in _invalid_login_cases]
 )
-def test_login_invalid_credentials(auth_api, username, password, desc):
-    resp = auth_api.login(username, password)
-    assert resp.status_code != 200, f"{desc}: 应返回非 200，实际 {resp.status_code}"
+def test_login_invalid_credentials(auth_api, case):
+    with allure.step(f"{case['id']}: {case['description']}"):
+        resp = auth_api.login(case["input"]["username"], case["input"]["password"])
+    assert resp.status_code != case["expected"]["status_code_not"], (
+        f"{case['description']}: 应返回非 "
+        f"{case['expected']['status_code_not']}，实际 {resp.status_code}"
+    )
 
 
 @allure.story("获取当前用户信息")

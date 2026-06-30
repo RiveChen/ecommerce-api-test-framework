@@ -1,8 +1,11 @@
 import pytest
 import allure
 from utils import assertion
+from utils.data_loader import load_cases
 
 pytestmark = allure.feature("Users 模块")
+
+_get_by_id_cases = load_cases("user_cases.yaml", "get_by_id")
 
 
 @allure.story("用户列表")
@@ -22,17 +25,13 @@ def test_list_users(user_api):
 @allure.story("查询单个用户")
 @pytest.mark.users
 @pytest.mark.parametrize(
-    "user_id,expected_status",
-    [
-        (1, 200),
-        (2, 200),
-        (9999, 404),
-    ],
+    "case", _get_by_id_cases, ids=[c["id"] for c in _get_by_id_cases]
 )
-def test_get_user_by_id(user_api, user_id, expected_status):
-    resp = user_api.get(user_id)
-    assertion.assert_status_code(resp, expected_status)
-    if expected_status == 200:
+def test_get_user_by_id(user_api, case):
+    with allure.step(f"{case['id']}: {case['description']}"):
+        resp = user_api.get(case["input"]["user_id"])
+    assertion.assert_status_code(resp, case["expected"]["status_code"])
+    if case["expected"]["status_code"] == 200:
         assertion.assert_json_key(resp, "id", "username")
 
 

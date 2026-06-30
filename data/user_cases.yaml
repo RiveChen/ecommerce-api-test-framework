@@ -1,0 +1,21 @@
+get_by_id:
+- id: "USER-001"
+  description: "查询存在的用户"
+  input:
+    user_id: 1
+  expected:
+    status_code: 200
+
+- id: "USER-002"
+  description: "查询另一个存在的用户"
+  input:
+    user_id: 2
+  expected:
+    status_code: 200
+
+- id: "USER-003"
+  description: "查询不存在的用户 ID"
+  input:
+    user_id: 9999
+  expected:
+    status_code: 404

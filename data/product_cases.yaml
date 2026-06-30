@@ -1,0 +1,43 @@
+get_by_id:
+- id: "PROD-001"
+  description: "查询存在的商品"
+  input:
+    product_id: 1
+  expected:
+    status_code: 200
+
+- id: "PROD-002"
+  description: "查询另一个存在的商品"
+  input:
+    product_id: 2
+  expected:
+    status_code: 200
+
+- id: "PROD-003"
+  description: "查询不存在的商品 ID"
+  input:
+    product_id: 99999
+  expected:
+    status_code: 404
+
+list_with_limit:
+- id: "PROD-004"
+  description: "分页参数 limit=5"
+  input:
+    limit: 5
+  expected:
+    count: 5
+
+- id: "PROD-005"
+  description: "分页参数 limit=10"
+  input:
+    limit: 10
+  expected:
+    count: 10
+
+- id: "PROD-006"
+  description: "分页参数 limit=20"
+  input:
+    limit: 20
+  expected:
+    count: 20
