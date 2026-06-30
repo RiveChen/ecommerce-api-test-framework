@@ -1,2 +1,0 @@
-INFO     utils.base_client:base_client.py:28 → DELETE https://dummyjson.com/products/1
-INFO     utils.base_client:base_client.py:37 ← 200  0.121s
