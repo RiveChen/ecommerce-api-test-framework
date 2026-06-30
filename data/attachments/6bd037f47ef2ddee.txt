@@ -1,0 +1,2 @@
+INFO     utils.base_client:base_client.py:28 → POST https://dummyjson.com/products/add
+INFO     utils.base_client:base_client.py:37 ← 201  0.119s
