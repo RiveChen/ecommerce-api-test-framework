@@ -1,0 +1,4 @@
+INFO     utils.base_client:base_client.py:28 → POST https://dummyjson.com/auth/login
+INFO     utils.base_client:base_client.py:37 ← 200  0.273s
+INFO     utils.base_client:base_client.py:28 → POST https://dummyjson.com/auth/login
+INFO     utils.base_client:base_client.py:37 ← 200  0.152s

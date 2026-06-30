@@ -1,0 +1,2 @@
+INFO     utils.base_client:base_client.py:28 → GET https://dummyjson.com/products
+INFO     utils.base_client:base_client.py:37 ← 200  0.154s
